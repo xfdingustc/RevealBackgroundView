@@ -86,6 +86,11 @@ public class RevealBackgroundView extends View {
     mRevealAnimator.start();
   }
 
+  public void setToFinishedFrame() {
+    changeState(STATE_FINISHED);
+    invalidate();
+  }
+
   @Override
   protected void onDraw(Canvas canvas) {
     if (mCurrentState == STATE_FINISHED) {
@@ -116,11 +121,6 @@ public class RevealBackgroundView extends View {
 
   public void setFillPaintColor(int color) {
     mFillPaint.setColor(color);
-  }
-
-  public void setToFinishedFrame() {
-    changeState(STATE_FINISHED);
-    invalidate();
   }
 
   public static interface OnStateChangeListener {
