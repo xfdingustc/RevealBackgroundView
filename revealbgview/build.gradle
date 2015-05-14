@@ -24,44 +24,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-/*
-if (project.hasProperty('PUBLISH_GROUP_ID')) {
-    android.libraryVariants.all { variant ->
-        def name = variant.buildType.name
-        if (name.equals(com.android.builder.core.BuilderConstants.DEBUG)) {
-            return;
-        }
 
-        def task = project.tasks.create(name: "jar${name.capitalize()}", type: Jar) {
-            from variant.javaCompile.destinationDir
-            exclude "** /R.class"
-            exclude "** /BuildConfig.class"
-        }
-        task.dependsOn variant.javaCompile
-        artifacts.add('archives', task)
-
-    }
-    apply plugin: 'maven'
-
-
-    uploadArchives {
-        println 'upload archives!!!'
-
-        repositories.mavenDeployer {
-            pom.packaging = "jar"
-            pom.groupId = PUBLISH_GROUP_ID
-            pom.artifactId = PUBLISH_ARTIFACT_ID
-            pom.version = PUBLISH_VERSION
-
-            repository(url: LOCAL_REPO)
-        }
-    }
-}*/
-
-
-def siteUrl = PROJ_WEBSITEURL // 项目的主页
-def gitUrl = PROJ_VCSURL // Git仓库的url
-group = PROJ_GROUP // Maven Group ID for the artifact，一般填你唯一的包名
+def siteUrl = PROJ_WEBSITEURL
+def gitUrl = PROJ_VCSURL
+group = PROJ_GROUP
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
@@ -69,7 +35,7 @@ install {
             project {
                 packaging 'aar'
                 // Add your description here
-                name PROJ_NAME //项目描述
+                name PROJ_NAME
                 url siteUrl
                 // Set your license
                 licenses {
@@ -80,7 +46,7 @@ install {
                 }
                 developers {
                     developer {
-                        id 'xfding'    //填写的一些基本信息
+                        id 'xfding'
                         name 'xfdingustc'
                         email 'xfdingustc@gmail.com'
                     }
@@ -119,7 +85,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "RevealBackgroundView"    //发布到JCenter上的项目名字
+        name = "RevealBackgroundView"
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
