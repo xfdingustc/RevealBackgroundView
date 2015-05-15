@@ -28,6 +28,8 @@ dependencies {
 def siteUrl = PROJ_WEBSITEURL
 def gitUrl = PROJ_VCSURL
 group = PROJ_GROUP
+version = PROJ_VERSION
+project.archivesBaseName = PROJ_ARTIFACTID
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
@@ -79,13 +81,15 @@ artifacts {
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
+
     configurations = ['archives']
     pkg {
-        repo = "maven"
-        name = "RevealBackgroundView"
+        repo = 'maven'
+        name = PROJ_NAME
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
